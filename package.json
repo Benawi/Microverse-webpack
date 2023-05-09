@@ -1,0 +1,35 @@
+{
+  "name": "microverse-webpack",
+  "version": "1.0.0",
+  "description": "<a name=\"readme-top\"></a>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --open",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Benawi/Microverse-webpack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Benawi/Microverse-webpack/issues"
+  },
+  "homepage": "https://github.com/Benawi/Microverse-webpack#readme",
+  "devDependencies": {
+    "css-loader": "^6.2.0",
+    "csv-loader": "^3.0.3",
+    "html-webpack-plugin": "^5.3.2",
+    "style-loader": "^3.2.1",
+    "webpack": "^5.82.0",
+    "webpack-cli": "^5.1.1",
+    "webpack-dev-server": "^3.11.3",
+    "xml-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
