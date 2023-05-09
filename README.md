@@ -1,288 +1,90 @@
-<a name="readme-top"></a>
+# Set up project with webpack
 
-<!--
-HOW TO USE:
-This is an example of how you may give instructions on setting up your project locally.
+## Learning objectives
+- Use webpack to bundle JavaScript.
 
-Modify this file to match your project and remove sections that don't apply.
+### Estimated time: 1.5h
 
-REQUIRED SECTIONS:
-- Table of Contents
-- About the Project
-  - Built With
-  - Live Demo
-- Getting Started
-- Authors
-- Future Features
-- Contributing
-- Show your support
-- Acknowledgements
-- License
+## Exercise
 
-OPTIONAL SECTIONS:
-- FAQ
+In this exercise you will build a simple yet powerful webpack boilerplate, which you can later use as a starting point in your projects. You will be working with the webpack official guides, which you know already from the previous lesson.
 
-After you're finished please remove all the comments and instructions!
--->
+*IMPORTANT NOTE: Read **all** instructions before you start this exercise.*
 
-<div align="center">
-  <!-- You are encouraged to replace this logo with your own! Otherwise you can also remove it. -->
-  <img src="murple_logo.png" alt="logo" width="140"  height="auto" />
-  <br/>
+### Instructions
 
-  <h3><b>Microverse README Template</b></h3>
+#### Initialize a new project and install webpack
 
-</div>
+- First set up a new GitHub repository for this exercise.
+- Follow the instructions from the [getting started](https://webpack.js.org/guides/getting-started/#basic-setup) guide to set up the basics. Implement all the steps from *Basic Setup* to *NPM Scripts*.
 
-<!-- TABLE OF CONTENTS -->
-
-# 📗 Table of Contents
-
-- [📖 About the Project](#about-project)
-  - [🛠 Built With](#built-with)
-    - [Tech Stack](#tech-stack)
-    - [Key Features](#key-features)
-  - [🚀 Live Demo](#live-demo)
-- [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
-  - [Prerequisites](#prerequisites)
-  - [Install](#install)
-  - [Usage](#usage)
-  - [Run tests](#run-tests)
-  - [Deployment](#deployment)
-- [👥 Authors](#authors)
-- [🔭 Future Features](#future-features)
-- [🤝 Contributing](#contributing)
-- [⭐️ Show your support](#support)
-- [🙏 Acknowledgements](#acknowledgements)
-- [❓ FAQ (OPTIONAL)](#faq)
-- [📝 License](#license)
-
-<!-- PROJECT DESCRIPTION -->
-
-# 📖 [your_project_name] <a name="about-project"></a>
-
-> Describe your project in 1 or 2 sentences.
-
-**[your_project__name]** is a...
-
-## 🛠 Built With <a name="built-with"></a>
-
-### Tech Stack <a name="tech-stack"></a>
-
-> Describe the tech stack and include only the relevant sections that apply to your project.
-
-<details>
-  <summary>Client</summary>
-  <ul>
-    <li><a href="https://reactjs.org/">React.js</a></li>
-  </ul>
-</details>
-
-<details>
-  <summary>Server</summary>
-  <ul>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
-  </ul>
-</details>
-
-<details>
-<summary>Database</summary>
-  <ul>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-  </ul>
-</details>
-
-<!-- Features -->
-
-### Key Features <a name="key-features"></a>
-
-> Describe between 1-3 key features of the application.
-
-- **[key_feature_1]**
-- **[key_feature_2]**
-- **[key_feature_3]**
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LIVE DEMO -->
-
-## 🚀 Live Demo <a name="live-demo"></a>
-
-> Add a link to your deployed project.
-
-- [Live Demo Link](https://google.com)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- GETTING STARTED -->
-
-## 💻 Getting Started <a name="getting-started"></a>
-
-> Describe how a new developer could make use of your project.
-
-To get a local copy up and running, follow these steps.
-
-### Prerequisites
-
-In order to run this project you need:
-
-<!--
-Example command:
-
-```sh
- gem install rails
+#### Add HTML
+- You already know that all the distribution files will be placed in */dist* directory. You also know that you should not create files manually in the */dist* folder, as there's a risk they will be overwritten. Therefore, install the HtmlWebpackPlugin to automatically create the **index.html** file in the */dist* directory. 
+- Follow the instructions from the [setting up HtmlWebpackPlugin](https://webpack.js.org/guides/output-management/#setting-up-htmlwebpackplugin) guide. Be extra careful when updating the `module.exports` object in your **webpack.config.js** file, to not to make any nesting mistakes.
+- Now delete all the files from the */dist* directory and run:
 ```
- -->
-
-### Setup
-
-Clone this repository to your desired folder:
-
-<!--
-Example commands:
-
-```sh
-  cd my-folder
-  git clone git@github.com:myaccount/my-project.git
+npm run build
 ```
---->
+- Check your */dist* folder. If it contains a new **index.html** file, it means you were successful. 
 
-### Install
-
-Install this project with:
-
-<!--
-Example command:
-
-```sh
-  cd my-project
-  gem install
-```
---->
-
-### Usage
-
-To run the project, execute the following command:
-
-<!--
-Example command:
-
-```sh
-  rails server
-```
---->
-
-### Run tests
-
-To run tests, run the following command:
-
-<!--
-Example command:
-
-```sh
-  bin/rails test test/models/article_test.rb
-```
---->
-
-### Deployment
-
-You can deploy this project using:
-
-<!--
-Example:
-
-```sh
+#### HTML template
+- If you plan to write some HTML in your project, it's easiest to do it with a template. Create a **/src/index.html** in which you can write your markup. Add some basic page markup, like:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wbpack Exercise</title>
+</head>
+<body>
+    <h1>Hello webpack!</h1>
+</body>
+</html>
 
 ```
- -->
+- Then modify **webpack.config.js** to point HtmlWebpackPlugin towards your template file:
+```javascript
+plugins: [
+  new HtmlWebpackPlugin({
+-   title: 'Output Management',
++   template: './src/index.html',
+  }),
+],
+```
+- You could remove the title property as well (as shown above), because you have set the page title in your **/src/index.html**.
+- Run `npm run build` to update the **/dist/index.html**.
+- View the **/dist/index.html** file in a code editor and notice how webpack inserted a `<script>` tag with correct path and minified the HTML for better performance.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+#### Add CSS
+The next step in building your webpack boilerplate is to add some style to it.
+Follow the steps in [loading CSS](https://webpack.js.org/guides/asset-management/#loading-css) guide.
 
-<!-- AUTHORS -->
+- In your **style.css** file add a generic rule, like:
+```css
+body {
+    background-color: bisque;
+}
+```
+- Next, execute `npm run build` and check if the HTML body style has changed.
 
-## 👥 Authors <a name="authors"></a>
+#### Setup local dev server
+Finally, it's time to improve your developer experience. When working on the project you will not want to run the build command from the terminal every time you make a change in the code. 
+Therefore go ahead and install a webpack dev server, which will *watch* your source files, generate compiled distribution files and even refresh the browser every time you save changes in the source code.
 
-> Mention all of the collaborators of this project.
+- Follow the [using webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server) guide and set it up on your local machine.
+Again, be cautious with updating the `module.exports` object in your **webpack.config.js**.
+- Once these steps are complete, you should see your application working at: `http://localhost:8080/`. Every change you make in **js** or **css** files now should be reflected in a browser a few seconds later.
 
-👤 **Author1**
+### Submit your exercise
+[Read this FAQ for a reminder on how to submit your exercise.](https://microverse.zendesk.com/hc/en-us/articles/360061344234)
+Now go to your Student Dashboard and submit your exercise. 
+Please note that as it is an exercise you do not need a code review so, you can merge the pull request immediately after you are done with the task.
+Paste the link to your GitHub repository.
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+## Additional materials
+*These are all optional, but if you're interested in exploring this topic further, here are some resources to help you. Any exploration here should be done outside program time.*
+- We strongly advise you to check the [official webpack documentation](https://webpack.js.org/concepts/) for better understanding of the tools you're using here.
+- To check all available options for HtmlWebpackPlugin plugin configuraion, visit the [webpack plugin GitHub repo](https://github.com/jantimon/html-webpack-plugin).
 
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- FUTURE FEATURES -->
-
-## 🔭 Future Features <a name="future-features"></a>
-
-> Describe 1 - 3 features you will add to the project.
-
-- [ ] **[new_feature_1]**
-- [ ] **[new_feature_2]**
-- [ ] **[new_feature_3]**
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTRIBUTING -->
-
-## 🤝 Contributing <a name="contributing"></a>
-
-Contributions, issues, and feature requests are welcome!
-
-Feel free to check the [issues page](../../issues/).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- SUPPORT -->
-
-## ⭐️ Show your support <a name="support"></a>
-
-> Write a message to encourage readers to support your project
-
-If you like this project...
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGEMENTS -->
-
-## 🙏 Acknowledgments <a name="acknowledgements"></a>
-
-> Give credit to everyone who inspired your codebase.
-
-I would like to thank...
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- FAQ (optional) -->
-
-## ❓ FAQ (OPTIONAL) <a name="faq"></a>
-
-> Add at least 2 questions new developers would ask when they decide to use your project.
-
-- **[Question_1]**
-
-  - [Answer_1]
-
-- **[Question_2]**
-
-  - [Answer_2]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LICENSE -->
-
-## 📝 License <a name="license"></a>
-
-This project is [MIT](./LICENSE) licensed.
-
-_NOTE: we recommend using the [MIT license](https://choosealicense.com/licenses/mit/) - you can set it up quickly by [using templates available on GitHub](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository). You can also use [any other license](https://choosealicense.com/licenses/) if you wish._
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+------
